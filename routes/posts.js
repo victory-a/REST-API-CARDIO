@@ -6,21 +6,20 @@ const Post = require('../models/Post')
 router.get('/', async (req, res) => {
     try {
         const posts = await Post.find();
-        res.send(posts)
+        res.json(posts)
     } catch (err) {
         res.json({ message: err });
     }
-})
+})  
 
 // get specific post
 router.get('/:postId', async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId);
-        res.json({ post })
+        res.send(post)
     } catch (err) {
         res.json({ message: err })
     }
-
 })
 
 // sends a post

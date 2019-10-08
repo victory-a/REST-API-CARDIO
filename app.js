@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use('/posts', postsRoute);
 app.use('/user', authRoute)
 
+
 // DB connection
 mongoose.set("useUnifiedTopology", true)
 mongoose.set("useNewUrlParser", true)

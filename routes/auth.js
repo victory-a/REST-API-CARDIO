@@ -1,13 +1,15 @@
 const router = require('express').Router();
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const verifyToken = require('../controller/verifyToken')
 const{ registerValidation, loginValidation } = require('../models/validation');
 
-router.get('/', async(req, res) => {
+router.get('/', verifyToken, async(req, res) => {
     const users = await User.find();
     try {
-        res.send(users)
+        const user = await req.user;
+        res.send({users})
     } catch (error) {
         res.send({message: error})
     }
@@ -70,6 +72,5 @@ router.post('/login', async (req, res) => {
 
     res.send('logged in successfully')
 });
-  
 module.exports = router;
 
